@@ -1,0 +1,50 @@
+$ git config --global user.name "your name"
+$ git config --global user.email "email@example.com"
+
+安装git后最后一步设置  
+
+
+$ pwd    显示当前目录
+$ git init      把当前目录变成Git可以管理的仓库
+$ ls -ah        显示隐藏文件
+
+
+$ git add file.txt       添加文件到缓存区
+$ git commit -m"tags"    将缓存区文件提交到仓库
+
+
+$ git status             查看仓库状态
+$ git diff 							 查看修改内容
+
+$ git log 							 查看历史记录
+$ git log --pretty=oneline		查看简略信息
+
+$ git reset --hard HEAD^     退回上一版本(HEAD^^ 代表上上个网站  HEAD~100  上100个版本)
+$ git reset --hard xxxxxx    指定回到未来的某个版本   版本号不必写全
+$ git reflog             查看命令历史
+
+
+$ git checkout -- file.txt      丢弃工作区的修改
+$ git reset HEAD file.txt  			可以把暂存区的修改撤销掉，重新放回工作区
+
+$ rm file.txt                   删除文件
+$ git checkout -- file.txt			恢复文件，前提是版本库中还有文件
+$ git rm file.txt								从版本库中删除文件，删除后要commit 一下
+
+
+
+搭建远程仓库
+首先查看用户目录里是否有.ssh目录，没有的话通过
+$ ssh-keygen -t rsa -C"email@example.com"			创建sshkey
+目录里的 id_rsa 是私钥 id_rsa.pub 是公钥
+
+登陆github 打开Account settings -> sshkey  -> title 任意。将公钥粘贴在key里
+
+创建项目，通过push上传库
+$ git remote add origin https://github.com/alreadyshow/second.git
+创建一个 origin 远程库
+$ git push -u origin master
+把本地库的内容上传到远程库中
+
+
+
