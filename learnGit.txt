@@ -22,7 +22,7 @@ $ git log --pretty=oneline		查看简略信息
 $ git reset --hard HEAD^     退回上一版本(HEAD^^ 代表上上个网站  HEAD~100  上100个版本)
 $ git reset --hard xxxxxx    指定回到未来的某个版本   版本号不必写全
 $ git reflog             查看命令历史
-
+$ cat file.txt					查看文件
 
 $ git checkout -- file.txt      丢弃工作区的修改
 $ git reset HEAD file.txt  			可以把暂存区的修改撤销掉，重新放回工作区
@@ -46,5 +46,26 @@ $ git remote add origin https://github.com/alreadyshow/second.git
 $ git push -u origin master
 把本地库的内容上传到远程库中
 
+GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
 
+使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。
 
+$ git clone git@github.com:alreadyshow/gitskills.git
+远程库克隆到本地库中
+
+创建分支
+
+$ git checkout -b dev			git checkout -b 参数表示创建并切换
+$ git branch dev						创建
+$ git checkout dev					切换
+
+$ git branch							查看当前分支
+
+合并分支
+$ git merge dev						git merge 合并指定分支到当前分支
+
+删除分支
+$ git branch -d dev	
+
+查看分支
+$ git log --graph --pretty=oneline --abbrev-commit			 
