@@ -73,10 +73,75 @@ $ git branch -d dev
 查看分支
 $ git log --graph --pretty=oneline --abbrev-commit		
 
+BUG分支
+
 $ git stash									保存工作区，但不提交
 $ git stash list						查看保存的工作区
 $ git stash apply 					回复工作区，恢复后stash内容不删除。
 $ git stash drop						删除stash内容
 $ git stash pop							恢复工作区，并删除stash
 
+Feature分支
 
+$ git branch -D dev  				强行删除分支 (强行删除一个没有被合并过的分支)
+
+多人协作
+
+$ git remote 						查看远程库的信息
+$ git remote -v 					显示更详细的信息
+$ git push origin master			推送master分支 
+
+多人协作的工作模式通常是这样：
+
+1、首先，可以试图用git push origin branch-name推送自己的修改；
+
+2、如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+3、如果合并有冲突，则解决冲突，并在本地提交；
+
+4、没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+
+如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
+
+
+查看远程库信息，使用git remote -v；
+
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
+
+标签管理
+标签不是按照时间顺序列出的，而是按照字母排序的
+$ git tag <name>   						创建标签
+$ git tag 								查看标签
+$ git tag <name> <num> 					给对应版本号打标签
+$ git show <tagname>					查看标签信息
+$ git tag -a <tagname> -m "say" <num>	通过版本号创建带有说明文字的标签
+$ git -d <tagname>						删除对应标签
+$ git push origin <tagname>				push到远程库中
+创建的标签都只存储在本地，不会自动推送到远程
+$ git push origin --tags				一次性推送所有尚未推送到远程的本地标签
+删除远程库中的标签时，需先删除本地标签，再删除远程
+$ git tag -d <tagname>
+$ git push origin :refs/tags/<tagname>	
+
+同时关联github和gitee
+首先删除已关联的origin库
+$ git remote rm origin
+然后关联github的远程库
+$ git remote add github git@github.com:alreadyshow/learnGit.git
+再关联码云的远程库
+$ git remote add gitee git@gitee.com:alreadyshow/learnGit.git
+然后可以查看远程库的状态
+$ git remote -v
+
+
+git自定义
+$ git config --global color.ui true			让git显示颜色
