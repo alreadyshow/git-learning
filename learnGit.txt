@@ -10,6 +10,7 @@ $ ls -ah        显示隐藏文件
 
 
 $ git add file.txt       添加文件到缓存区
+$ git add -all
 $ git commit -m"tags"    将缓存区文件提交到仓库
 
 
@@ -21,7 +22,7 @@ $ git log --pretty=oneline		查看简略信息
 
 $ git reset --hard HEAD^     退回上一版本(HEAD^^ 代表上上个网站  HEAD~100  上100个版本)
 $ git reset --hard xxxxxx    指定回到未来的某个版本   版本号不必写全
-$ git reflog             查看命令历史
+$ git reflog             ````查看命令历史
 $ cat file.txt					查看文件
 
 $ git checkout -- file.txt      丢弃工作区的修改
@@ -41,10 +42,13 @@ $ ssh-keygen -t rsa -C"email@example.com"			创建sshkey
 登陆github 打开Account settings -> sshkey  -> title 任意。将公钥粘贴在key里
 
 创建项目，通过push上传库
-$ git remote add origin https://github.com/alreadyshow/second.git
+$ git remote add origin https://github.com/alreadyshow/personalweb.git
 创建一个 origin 远程库
 $ git push -u origin master
 把本地库的内容上传到远程库中
+
+
+
 
 GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
 
@@ -145,3 +149,24 @@ $ git remote -v
 
 git自定义
 $ git config --global color.ui true			让git显示颜色
+
+遇到的问题
+
+
+windows push时会出现 warning: LF will be replaced by CRLF
+原因：在windows中的换行符为 CRLF， 而在linux下的换行符为：LF
+使用git来生成一个 new 工程后，文件中的换行符为LF， 当执行 git add .时，系统提示：LF 将被转换成 CRLF
+
+解决：删除刚刚生成的.git文件
+    $ rm -rf .git  
+    $ git config --gobal core.autocrlf false  //配置 不自动转换 换行符
+	$ git init  
+	$ git add . 
+	完美运行
+
+	
+出现 error: failed to push some refs to 'https://github.com/CrazyDony/text.git'
+可能时本地版本过低的原因
+$ git push -u origin master -f
+可以解决
+
